@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="/assets/static.js"></script>
+<script>
+
+$(document).ready(function(){
+  console.log($(".initial").text())
+  $("p").mouseover(function(){
+    $(this).css("background-color", "yellow");
+    lerTexto( $(this).text())
+  });
+  $("p").mouseout(function(){
+    speechSynthesis.cancel();
+    $(this).css("background-color", "lightgray");
+  });
+  $("p").click(function(){
+    speechSynthesis.cancel();
+    redirecionar("Abrindo "+$(this).text(), $(this).attr("title"), "/mouse/categories")
+
+  });
+  $("a").focus(function(){
+    lerTexto("link")
+  });
+});
+</script>
+
+<style>
+  .content{
+  display: flex;
+  justify-content: flex-start;
+  }
+
+  .menu {
+  width: 30%;
+  background-color: blue;
+  position: static;
+  }
+
+  .box {
+  width: 70%;
+  background-color: blue;
+  position: static;
+  margin: 30px;
+  }
+
+  p {
+    border-radius: 20px; padding: 40px; height: 40px;  width: 50%; text-align: center; margin: 30px;  border: 5px outset red
+  }
+  </style>
+
+</head>
+<body>
+<div class="content">
+
+<div class="menu">
+  
+  {{ range .categories }}
+    <p title={{ .Id }}>{{ .Name }}</p>
+  {{ end }}
+
+</div>
+
+<div class="box" style="top: 0%;">
+  <p> {{ .title }}</p>
+  <p>{{ .text }}</p>
+</div>
+
+</div>
+
+</body>
+</html>

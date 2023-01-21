@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="/assets/static.js"></script>
+<script>
+
+
+
+$(document).ready(function(){
+  console.log($(".initial").text())
+
+  $("a").focus(function(){
+    lerTexto($(this).text())
+  });
+  $("a").focusout(function(){
+    speechSynthesis.cancel();
+  });
+});
+</script>
+
+<style>
+  .content{
+  display: flex;
+  justify-content: flex-start;
+  }
+
+  .menu {
+  width: 30%;
+  background-color: green;
+  position: static;
+  }
+
+  .box {
+  width: 70%;
+  background-color: green;
+  position: static;
+  margin: 30px;
+  }
+
+  </style>
+
+</head>
+<body>
+<div class="content">
+
+<div class="menu">
+
+  {{ range .categories }}
+    <a title={{ .Id }} href="javascript:redirecionarLink(document.activeElement, '/teclado/categories');">{{ .Name }}</a><br/>
+  {{ end }}
+
+</div>
+
+<div class="box">
+
+  {{ range .posts }}
+  <a href="javascript:redirecionarLink(document.activeElement, '/teclado/post');" title={{ .Id }}>{{ .Title }}</a>
+  {{ end }}  
+
+
+</div>
+
+</div>
+
+</body>
+</html>
